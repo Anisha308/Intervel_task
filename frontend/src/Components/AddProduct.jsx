@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAddProductMutation } from "../api/apiSlice.js"; // Adjust the import path as needed
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 import React  from "react";
 import {
@@ -12,47 +13,49 @@ import {
   Box,
   Paper,
 } from "@mui/material";
+import { Navigate } from "react-router-dom";
 
 function AddProduct() {
-    const [formData, setFormData] = useState({
-      name: "",
-      purchase_price: "",
-      sales_price: "",
-      profit: "",
-    });
+  const navigate = useNavigate(); // Initialize useNavigate
+
+  const [formData, setFormData] = useState({
+    name: "",
+    purchase_price: "",
+    sales_price: "",
+    profit: "",
+  });
   const [addProduct, { isLoading, isError, isSuccess, error }] =
     useAddProductMutation();
 
-    const handleChange = (e) => {
-        console.log('kkkdkdlkkdjwsdkkwd');
-        
-      const { name, value } = e.target;
-console.log(name,value,'dtaa');
+  const handleChange = (e) => {
+    console.log("kkkdkdlkkdjwsdkkwd");
 
-        setFormData((prevFormData) => {
-          const updatedFormData = {
-            ...prevFormData,
-            [name]: value,
-          };
+    const { name, value } = e.target;
+    console.log(name, value, "dtaa");
 
-          // Recalculate profit whenever purchasePrice or salesPrice changes
-          if (name === "purchase_price" || name === "sales_price") {
-            const profit =
-              updatedFormData.sales_price - updatedFormData.purchase_price;
-            updatedFormData.profit = isNaN(profit) ? "" : profit.toFixed(2); // Format to 2 decimal places
-          }
+    setFormData((prevFormData) => {
+      const updatedFormData = {
+        ...prevFormData,
+        [name]: value,
+      };
 
-          return updatedFormData;
-        });
-    };
+      // Recalculate profit whenever purchasePrice or salesPrice changes
+      if (name === "purchase_price" || name === "sales_price") {
+        const profit =
+          updatedFormData.sales_price - updatedFormData.purchase_price;
+        updatedFormData.profit = isNaN(profit) ? "" : profit.toFixed(2); // Format to 2 decimal places
+      }
+
+      return updatedFormData;
+    });
+  };
 
   const handleSubmit = async (e) => {
-    
-      e.preventDefault();
+    e.preventDefault();
 
     try {
       // Call the mutation function with form data
-     const response= await addProduct(formData).unwrap();
+      const response = await addProduct(formData).unwrap();
       // Handle success
       toast.success(response.message);
       // Optionally, clear the form
@@ -62,10 +65,11 @@ console.log(name,value,'dtaa');
         sales_price: "",
         profit: "",
       });
+      navigate("/"); // Navigate to /addProduct
     } catch (err) {
       // Handle errors
-        console.error("Failed to add product:", err.data.message);
-        toast.error(err.data.message)
+      console.error("Failed to add product:", err);
+      toast.error(err.data.message);
     }
   };
   return (
