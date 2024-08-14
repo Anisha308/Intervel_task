@@ -47,11 +47,15 @@ export default function ShowProduct() {
         }
 
         if (error) {
-          throw new Error("Error fetching products");
+          throw new Error("Add Products");
         }
 
         if (productsData) {
           setProducts(productsData);
+        }
+        else {
+          console.error('Add new products');
+          
         }
       } catch (error) {
         console.error("Error displaying products:", error);

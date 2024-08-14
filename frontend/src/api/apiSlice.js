@@ -5,6 +5,9 @@ const baseQuery = fetchBaseQuery({
 });
 
 export const apiSlice = createApi({
+  reducerPath: "api",
+  tagTypes: ["Products"], 
+
   baseQuery,
   endpoints: (builder) => ({
     addProduct: builder.mutation({
@@ -13,9 +16,11 @@ export const apiSlice = createApi({
         method: "POST",
         body: newProduct,
       }),
+      invalidatesTags: ["Products"],
     }),
     getAllProducts: builder.query({
       query: () => "/getProducts",
+      providesTags: ["Products"],
     }),
     getProductById: builder.query({
       query: (id) => `/productDetails/${id}`,

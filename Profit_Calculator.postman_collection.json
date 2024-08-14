@@ -1,0 +1,67 @@
+{
+	"info": {
+		"_postman_id": "299b7d5e-1b2c-4c21-aea6-c9b9fe4352aa",
+		"name": "Profit_Calculator",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30504027"
+	},
+	"item": [
+		{
+			"name": "addProduct",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7008/addProduct",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7008",
+					"path": [
+						"addProduct"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "productDetails",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7008/productDetails",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7008",
+					"path": [
+						"productDetails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllProducts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7008/getProducts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7008",
+					"path": [
+						"getProducts"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
