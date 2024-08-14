@@ -73,7 +73,7 @@ const Header: React.FC<HeaderProps> = (props) => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            Demo App
+            Profit Calculator
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (

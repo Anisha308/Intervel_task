@@ -64,8 +64,8 @@ console.log(name,value,'dtaa');
       });
     } catch (err) {
       // Handle errors
-        console.error("Failed to add product:", err);
-        toast.error(err)
+        console.error("Failed to add product:", err.data.message);
+        toast.error(err.data.message)
     }
   };
   return (

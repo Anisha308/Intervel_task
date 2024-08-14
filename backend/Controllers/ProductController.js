@@ -38,6 +38,8 @@ const addProduct = async (req, res) => {
 const getProducts = async (req, res) => {
     console.log('got your productas');
     const { id } = req.params
+    console.log(id,'iddd');
+    
     try {
         const product = await Product.findByPk(id)
         if (!product) {
@@ -50,7 +52,18 @@ const getProducts = async (req, res) => {
         
     }
 }
-export {
-    addProduct,
-    getProducts
-}
+
+const getAllProducts = async (req, res) => {
+  try {
+    const products = await Product.findAll();
+    if (products.length === 0) {
+      return res.status(404).json({ message: "No products found" });
+    }
+    res.status(200).json(products);
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+export { addProduct, getProducts, getAllProducts };
