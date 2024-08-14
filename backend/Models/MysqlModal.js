@@ -1,13 +1,13 @@
 import { DataTypes } from "sequelize";
-import sequelize from "../config/dbsql.js"; // Sequelize instance for MySQL
+import sequelize from "../config/mySqlConfig.js";
 
 const Product = sequelize.define(
   "Product",
   {
     product_id: {
       type: DataTypes.INTEGER,
-      autoIncrement: true, // This should be the only autoIncrement column
-      primaryKey: true, // It must be defined as the primary key
+      autoIncrement: true,
+      primaryKey: true,
     },
     name: {
       type: DataTypes.STRING,
@@ -27,7 +27,7 @@ const Product = sequelize.define(
     },
   },
   {
-    timestamps: true, // Add createdAt and updatedAt fields
+    timestamps: true,
   }
 );
 

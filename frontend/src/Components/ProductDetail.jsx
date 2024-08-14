@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useGetProductByIdQuery } from "../api/apiSlice"; // Adjust the path as necessary
+import { useGetProductByIdQuery } from "../api/apiSlice";
 import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -15,7 +15,7 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
 }));
 
 export default function ProductDetail() {
-  const { id } = useParams(); // Get product_id from URL params
+  const { id } = useParams();
   const { data: product, error, isLoading } = useGetProductByIdQuery(id);
 
   if (isLoading) {
@@ -47,7 +47,7 @@ export default function ProductDetail() {
   }
 
   if (!product) {
-    return null; // Or a fallback UI if product is null
+    return null;
   }
 
   return (
@@ -63,7 +63,7 @@ export default function ProductDetail() {
 
       <Box
         sx={{
-          borderBottom: "1px solid #e0e0e0", // Underline after each detail
+          borderBottom: "1px solid #e0e0e0",
           paddingBottom: 2,
           marginBottom: 2,
           display: "flex",

@@ -18,10 +18,6 @@ const drawerWidth = 240;
 const navItems = ["Home", "About", "Contact"];
 
 interface HeaderProps {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
   window?: () => Window;
 }
 
@@ -90,7 +86,7 @@ const Header: React.FC<HeaderProps> = (props) => {
         open={mobileOpen}
         onClose={handleDrawerToggle}
         ModalProps={{
-          keepMounted: true, // Better open performance on mobile.
+          keepMounted: true,
         }}
         sx={{
           display: { xs: "block", sm: "none" },
@@ -101,7 +97,6 @@ const Header: React.FC<HeaderProps> = (props) => {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
-        {/* Main content can go here */}
       </Box>
     </Box>
   );

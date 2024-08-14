@@ -1,8 +1,8 @@
-import React from 'react'
+import React from "react";
 import { Routes, Route } from "react-router-dom";
-import AddProduct from '../Components/AddProduct';
-import AllProducts from '../Components/AllProducts.jsx'
-import ProductDetail from '../Components/ProductDetail';
+import AddProduct from "../Components/AddProduct";
+import AllProducts from "../Components/AllProducts.jsx";
+import ProductDetail from "../Components/ProductDetail";
 function Router() {
   return (
     <div>
@@ -15,4 +15,4 @@ function Router() {
   );
 }
 
-export default Router
+export default Router;

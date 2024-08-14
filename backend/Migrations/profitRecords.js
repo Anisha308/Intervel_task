@@ -1,4 +1,3 @@
-// migrations/create-profit-records.js
 export default {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable("ProfitRecords", {

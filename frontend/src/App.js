@@ -1,8 +1,10 @@
-import './App.css';
-import Layout from './Layout/layout.jsx';
+import "./App.css";
+import Layout from "./Layout/layout.jsx";
 function App() {
   return (
-   <div><Layout/></div>
+    <div>
+      <Layout />
+    </div>
   );
 }
 

@@ -15,11 +15,13 @@ const pgClient = new Sequelize(
 );
 
 pgClient
-  .sync({ alter: true })
+  .authenticate()
   .then(() => {
-    console.log("ProfitRecords table has been synchronized.");
+    console.log("Postgres Connection has been established successfully.");
   })
   .catch((err) => {
     console.error("Error syncing ProfitRecords table:", err.message);
   });
+
+  
 export default pgClient;
