@@ -42,7 +42,7 @@ const ShowProduct = () => {
       component={Paper}
       sx={{ maxWidth: "100%", overflowX: "auto" }}
     >
-      <Table sx={{ minWidth: 650 }}>
+      <Table sx={{ minWidth: 60 }}>
         <TableHead>
           <TableRow> <TableCell>
               <Typography variant="body2" color="textSecondary">

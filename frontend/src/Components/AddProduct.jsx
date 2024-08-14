@@ -1,4 +1,8 @@
 import { useState } from "react";
+import { useAddProductMutation } from "../api/apiSlice.js"; // Adjust the import path as needed
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import React  from "react";
 import {
   Container,
@@ -11,11 +15,13 @@ import {
 
 function AddProduct() {
     const [formData, setFormData] = useState({
-        productName: "",
-        purchasePrice: "",
-        salesPrice: "",
-        profit:"",
-    })
+      name: "",
+      purchase_price: "",
+      sales_price: "",
+      profit: "",
+    });
+  const [addProduct, { isLoading, isError, isSuccess, error }] =
+    useAddProductMutation();
 
     const handleChange = (e) => {
         console.log('kkkdkdlkkdjwsdkkwd');
@@ -30,22 +36,38 @@ console.log(name,value,'dtaa');
           };
 
           // Recalculate profit whenever purchasePrice or salesPrice changes
-          if (name === "purchasePrice" || name === "salesPrice") {
+          if (name === "purchase_price" || name === "sales_price") {
             const profit =
-              updatedFormData.salesPrice - updatedFormData.purchasePrice;
-            updatedFormData.profit = isNaN(profit) ? "" : profit;
+              updatedFormData.sales_price - updatedFormData.purchase_price;
+            updatedFormData.profit = isNaN(profit) ? "" : profit.toFixed(2); // Format to 2 decimal places
           }
 
           return updatedFormData;
         });
     };
 
-    const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
+    
       e.preventDefault();
-        console.log('submtted');
-        
 
-    };
+    try {
+      // Call the mutation function with form data
+     const response= await addProduct(formData).unwrap();
+      // Handle success
+      toast.success(response.message);
+      // Optionally, clear the form
+      setFormData({
+        name: "",
+        purchase_price: "",
+        sales_price: "",
+        profit: "",
+      });
+    } catch (err) {
+      // Handle errors
+        console.error("Failed to add product:", err);
+        toast.error(err)
+    }
+  };
   return (
     <Container component="main" maxWidth="xs">
       <Paper elevation={3} sx={{ padding: 4 }}>
@@ -58,10 +80,10 @@ console.log(name,value,'dtaa');
             margin="normal"
             required
             fullWidth
-            id="productName"
+            id="name"
             label="Product Name"
-            name="productName"
-            value={formData.productName}
+            name="name"
+            value={formData.name}
             onChange={handleChange}
             autoComplete="productName"
             autoFocus
@@ -71,10 +93,11 @@ console.log(name,value,'dtaa');
             margin="normal"
             required
             fullWidth
-            id="purchasePrice"
+            type="number" // Ensure numeric input
+            id="purchase_price"
             label="Purchase Price"
-            name="purchasePrice"
-            value={formData.purchasePrice}
+            name="purchase_price"
+            value={formData.purchase_price}
             onChange={handleChange}
             autoComplete="purchasePrice"
           />
@@ -83,10 +106,11 @@ console.log(name,value,'dtaa');
             margin="normal"
             required
             fullWidth
-            id="salesPrice"
+            id="sales_price"
             label="sales Price"
-            name="salesPrice"
-            value={formData.salesPrice}
+            type="number" // Ensure numeric input
+            name="sales_price"
+            value={formData.sales_price}
             onChange={handleChange}
             autoComplete="salesPrice"
           />
@@ -98,7 +122,7 @@ console.log(name,value,'dtaa');
             id="profit"
             label="Profit"
             name="profit"
-            value={formData.salesPrice - formData.purchasePrice}
+            value={formData.sales_price - formData.purchase_price}
             onChange={handleChange}
             autoComplete="profit"
           />
@@ -113,6 +137,7 @@ console.log(name,value,'dtaa');
           </Button>
         </Box>
       </Paper>
+      <ToastContainer />
     </Container>
   );
 }

@@ -3,9 +3,9 @@ import ProfitRecord from "../Models/ProfiteRecord.js";
 
 const addProduct = async (req, res) => {
     console.log('Hiii anishaaaa');
-    const { name, purchase_price, sales_price } = req.body
+    const { name, purchase_price, sales_price,profit } = req.body
     
-    console.log(name,purchase_price,sales_price);
+    console.log(name,purchase_price,sales_price,profit);
     
     if (!name || !purchase_price || !sales_price) {
         return res.status(400).json({ message: "All fields are required" })

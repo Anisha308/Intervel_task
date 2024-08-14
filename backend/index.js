@@ -1,6 +1,7 @@
 import express from 'express';
 import cookieParser from "cookie-parser";
 import sequelize from './config/dbsql.js'; // Sequelize instance
+import cors from "cors";
 
 import dotenv from 'dotenv'
 dotenv.config()
@@ -9,6 +10,13 @@ import Router from './Routes/ProductRoutes.js'
 import Product from './Models/MysqlModal.js'; // Import the Product model
 
 const app = express(); // Initialize express app
+const corsOptions = {
+  origin: process.env.REACT_APP_API_BASE_URL,
+  methods: "GET,POST,PUT,DELETE,OPTIONS",
+  allowedHeaders: "Content-Type,Authorization",
+  credentials: true,
+};
+app.use(cors(corsOptions)); 
 
 app.use(express.json());
 app.use(cookieParser());
